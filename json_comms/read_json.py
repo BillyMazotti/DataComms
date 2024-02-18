@@ -3,40 +3,56 @@ import json
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+import requests
+import os
 
 # requires 
-set_speed_hz = 50
-num_messages = int(1e3)
+set_speed_hz = 100
+num_messages = int(1e2)
 
 speeds = np.zeros(int(num_messages))
 times = np.zeros(int(num_messages))         # host time when message was recorded
 timestamps = np.zeros(int(num_messages))    # gest time when message was sent
+missed = np.zeros(int(num_messages))
+longest_delay = 0.0
 
-missed = 0
+
+tstart = time.time()
 for i in range(num_messages):
-    t0 = time.time()
-    times[i] = t0
-    time.sleep(0.008)
     print(i)
+    t0 = time.time() - tstart
+    time.sleep(1/set_speed_hz)
+    
     try:
-        with open('test_connection.json') as json_file:
-            data = json.load(json_file)
+        with open('selected_json_file.json','r') as json_file:
+            
+            data = json.loads(json_file.read())
+            times[i] = time.time() - tstart
+            speeds[i] = int(1/(times[i]-t0))
             timestamps[i] = data["timestamp"]
-            print(timestamps[i])
     except Exception as error:
+        
+        times[i] = time.time() - tstart
+        speeds[i] = int(1/(times[i]-t0))
         timestamps[i] = 0
-        missed += 1
+        missed[i] = 1
         print(f"An exception has occured: {error}")
-        
-    print(f"Update Frequency {int(1/(time.time()-t0))} hz")
-        
+    
+    if times[i]-t0 > longest_delay: longest_delay = times[i]-t0
+            
     
 plt.figure()
 plt.plot(times,speeds)
-plt.scatter(times,speeds)
-plt.title(f"Python IP Socket Connection Test Sending {int(n)} Messages \n \
-           of np.ones((8))from VM to Host Machine \n \
-          Longest Delay: {round(longest_delay,3)} s or {round(1/longest_delay)} Hz")
+for i in range(num_messages):
+    if(missed[i] == 1):
+        color = 'r'
+    else:
+        color = 'b'
+    plt.scatter(times[i],speeds[i],color=color)
+
+plt.title(f"Python JSON  Connection Test Sending {int(num_messages)} Messages \n \
+           of dict(timestamp,8 joints) from VM to Host Machine \n \
+            Longest Delay: {round(longest_delay,3)} s")
 plt.xlabel('time [s]')
 plt.ylabel('message speed [Hz]')
 plt.show()
