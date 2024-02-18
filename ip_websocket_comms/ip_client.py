@@ -5,14 +5,13 @@ import numpy as np
 import pickle
 
 set_speed_hz = 50
+num_messages = 1e4
 
-n = 1e4
-max_hz_to_report = 100
-speeds = np.zeros((int(n))) # recorded message Hz
-times = np.zeros((int(n)))  # time at wich message was recorded
+speeds = np.zeros((int(num_messages))) # recorded message Hz
+times = np.zeros((int(num_messages)))  # host time when message was recorded
 longest_delay = 0.0
 tstart = time.time()
-for i in range(int(n)):
+for i in range(int(num_messages)):
     print(i)
     t0 = time.time() - tstart
     time.sleep(1/set_speed_hz)
