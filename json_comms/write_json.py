@@ -15,7 +15,7 @@ if __name__ == '__main__':
     DATA_TRANSFER_MODE = 2  # local_to_local communctions
     
     # control message update rate
-    message_speed_hz = 50
+    message_speed_hz = 300
     
     
     # TODO specify in readme that these directories will need to be edited for testing
