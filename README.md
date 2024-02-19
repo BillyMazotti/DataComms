@@ -28,6 +28,14 @@ By increasing the client's sock.listen() rate from 1 to 5, we sometimes observe 
 ![alt text](README_figs/listen5_2.png)
 ![alt text](README_figs/listen5_3.png)
 
+(2/18/24)
+Testing Host to Host, we find better drop performance however performance is still inconsistent and was observed to drop below 30Hz (not shown in image).
+
+![alt text](README_figs/listen1_1_local.png)
+![alt text](README_figs/listen1_2_local.png)
+
+
+
 
 
 
