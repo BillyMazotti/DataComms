@@ -5,7 +5,7 @@ import time
 
 def set_message_send_rate():
     
-    return 300
+    return 200
 	
 def write_to_json(json_path: str, dictionary: dict):
 

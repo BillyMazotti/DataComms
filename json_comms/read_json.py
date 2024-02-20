@@ -9,8 +9,8 @@ from write_json import set_message_send_rate
 
 # requires 
 send_message_rate = set_message_send_rate()     # Hz
-recieve_message_rate = 1000                     # Hz
-num_messages_to_recieve = 1e2                   # number of messages
+recieve_message_rate = 800                     # Hz
+num_messages_to_recieve = 1e4                   # number of messages
 
 speeds = np.zeros(int(num_messages_to_recieve))
 times = np.zeros(int(num_messages_to_recieve))          # time when message was read
@@ -69,6 +69,7 @@ for i in tqdm(range(int(num_messages_to_recieve)-1)):
     if before_delay_timestamp != -1.0 and after_delay_timestamp != -1.0:
         delay = after_delay_timestamp - before_delay_timestamp
         if delay > longest_delay_for_new_messaged_read: longest_delay_for_new_messaged_read = delay
+if (longest_delay_for_new_messaged_read == 0.0): longest_delay_for_message_read = 1e-12
 
 times_missed = times[missed == 1]
 times_not_missed = times[missed == 0]

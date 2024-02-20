@@ -19,9 +19,12 @@ Writing to and reading from a .json file using write.json and read.json respecti
 
 ![alt text](figs/json/send300_rec1000.png)
 
+TODO
 TODO - further discuss meanings of plot
 
 ## IP Websocket Comms
+TODO - make the example plot results from the client side similar to json
+
 If you'd like to communicate between machiens using a shared network (e.g. over wifi) you can use Python's "socket" library to get the job done.
 
 ### Running IP Websocket Comms
