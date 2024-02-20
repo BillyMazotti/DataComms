@@ -2,6 +2,10 @@
 
 import json
 import time
+
+def set_message_send_rate():
+    
+    return 300
 	
 def write_to_json(json_path: str, dictionary: dict):
 
@@ -15,7 +19,7 @@ if __name__ == '__main__':
     DATA_TRANSFER_MODE = 2  # local_to_local communctions
     
     # control message update rate
-    message_speed_hz = 300
+    message_speed_hz = set_message_send_rate()
     
     
     # TODO specify in readme that these directories will need to be edited for testing
